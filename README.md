@@ -86,56 +86,6 @@ The application will start on `http://localhost:8080`
 | POST | `/api/role/` | Create new role | Admin Only |
 | GET | `/api/role/` | Get all roles | Authenticated |
 
-## Request/Response Examples
-
-### 1. User Registration
-```json
-POST /api/user/
-{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "password": "password123"
-}
-```
-
-### 2. User Login
-```json
-POST /api/auth/login
-{
-    "email": "john@example.com",
-    "password": "password123"
-}
-
-Response:
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-}
-```
-
-### 3. Add Train (Admin Only)
-```json
-POST /api/train/
-Headers: Authorization: Bearer <jwt_token>
-{
-    "trainName": "Express 123",
-    "source": "Delhi",
-    "destination": "Mumbai",
-    "totalSeats": 100,
-    "availableSeats": 100
-}
-```
-
-### 4. Check Seat Availability
-```json
-GET /api/train/seats?source=Delhi&destination=Mumbai
-Headers: Authorization: Bearer <jwt_token>
-```
-
-### 5. Book Seat
-```json
-POST /api/booking/?userId=1&trainId=1
-Headers: Authorization: Bearer <jwt_token>
-```
 
 ## Security Features
 
@@ -152,25 +102,14 @@ The booking system uses:
 - **Transactional**: `@Transactional` annotation ensures atomicity
 - **Database Constraints**: Proper foreign key constraints
 
-## Error Handling
-
-The API returns appropriate HTTP status codes:
-- `200 OK`: Successful requests
-- `201 Created`: Resource created successfully
-- `400 Bad Request`: Invalid input data
-- `401 Unauthorized`: Authentication required/invalid token
-- `403 Forbidden`: Insufficient permissions
-- `404 Not Found`: Resource not found
-- `500 Internal Server Error`: Server errors
 
 ## Assumptions Made
 
-1. **User Registration**: New users are assigned "USER" role by default
+1. **User Registration**: New users are assigned "ROLE_USER" role by default
 2. **Admin Creation**: Only existing admins can create new admin users
 3. **Seat Booking**: One seat per booking request
 4. **Train Routes**: Simple source-destination mapping (no intermediate stations)
-5. **Payment**: Booking confirmation without payment integration
-6. **Seat Numbering**: Auto-generated seat numbers for bookings
+5. **Seat Numbering**: Auto-generated seat numbers for bookings
 
 ## Testing
 
@@ -190,34 +129,13 @@ curl -X GET http://localhost:8080/api/train/ \
 
 ### Database Schema
 The application auto-creates the following tables:
-- `users` - User information
-- `roles` - Role definitions
-- `user_roles` - User-role mapping
-- `trains` - Train information
-- `bookings` - Booking records
+- `user_table` - User information
+- `role_table` - Role definitions
+- `user_role` - User-role mapping
+- `train_table` - Train information
+- `booking_table` - Booking records
 
-## Future Enhancements
-
-- Unit and integration tests
-- API documentation with Swagger
-- Caching for frequently accessed data
-- Email notifications for bookings
-- Payment gateway integration
-- Seat selection feature
-- Multi-class booking support
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contact
-
-For any queries or issues, please contact [your-email@example.com]
