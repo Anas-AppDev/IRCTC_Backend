@@ -94,6 +94,14 @@ The application will start on `http://localhost:8080`
 - **Password Encryption**: BCrypt password hashing
 - **Input Validation**: Request payload validation
 - **Exception Handling**: Comprehensive error handling with proper HTTP status codes
+- **Comprehensive Exception Handling**:
+- Global exception handler with @ControllerAdvice
+- Custom ResourceNotFoundException for missing resources
+- JWT authentication exceptions (invalid token, expired token)
+- Authorization exceptions (insufficient permissions)
+- Authentication failures (incorrect username/password)
+- Proper HTTP status codes for different error scenarios
+- Structured error responses with meaningful messages
 
 ## Race Condition Handling
 
